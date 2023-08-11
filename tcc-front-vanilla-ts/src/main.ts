@@ -1,9 +1,5 @@
 import "./style.css";
 
-const justBackground = `<div class="container_div" style="position: relative; display: flex">
-<canvas width="500" height="500" id="canv" />
-</div>`;
-
 const mainPage = `
 <div class="container_div" style="position: relative; display: flex">
 <div
@@ -26,16 +22,16 @@ const mainPage = `
   flex-direction: column;
   border: solid;
   border-radius: 10px;
-  padding: 5px
+  padding: 10px
   "
 >
   <div style="display: flex; flex-direction: column">
-  <h2>Bem-Vindo ao questionário do meu TCC!</h2>
+  <h2 style="color: #0f0">Bem-Vindo ao questionário do meu TCC!</h2>
   <h4 style="margin: 0">Contextualizando...</h4>
   <p  style="margin: 0">O desenvolvimento de modelos de inteligência artificial, como o ChatGPT, tornou possível que a tecnologia produza textos elaborados e articulados, que são tão semelhantes às produções humanas que muitas vezes é difícil saber se um texto foi escrito por homens ou máquinas.</p>
   <br/>
   <h4  style="margin: 0">Sabendo disso,</h4>
-  <p  style="margin: 0">minha proposta com esse questionário é que você leia 5 notícias e tente identificar se elas foram escritas por um ser humano ou pelo ChatGPT. Será que você conseguirá distinguir o homem da tecnologia? Mas tenha cuidado, você pode estar sendo observado pela Matrix, e tudo pode não passar de uma simulação...Boa sorte!</p>
+  <p  style="margin: 0">minha proposta com esse questionário é que você leia 5 notícias e tente identificar se elas foram escritas por um ser humano ou pelo ChatGPT. Será que você conseguirá distinguir o homem da máquina? Mas tenha cuidado, você pode estar sendo observado pela Matrix, e tudo pode não passar de uma simulação...Boa sorte!</p>
   </div>
   <br/>
 
@@ -46,7 +42,7 @@ const mainPage = `
   <br/>
 
   <div style="display: flex; flex-direction: column">
-  <p>Suas respostas nesse questionário serão utilizadas de forma anônima para fins de análise e escrita de um artigo científico. O e-mail inserido terá como único e exclusivo propósito o controle de usuários que já realizaram o teste, para impedir que a mesma pessoa responda múltiplas vezes e comprometa o resultado da análise.</p>
+  <p id="agreeCheckText">Suas respostas nesse questionário serão utilizadas de forma anônima para fins de análise e escrita de um artigo científico. O e-mail inserido terá como único e exclusivo propósito o controle de usuários que já realizaram o teste, para impedir que a mesma pessoa responda múltiplas vezes e comprometa o resultado da análise.</p>
   <input type="checkbox" id="agree-check-box" required name="Concordo" />
   </div>
 
@@ -86,20 +82,22 @@ const quizPage = `
 <canvas width="500" height="500" id="canv" />
 </div>`;
 
-document.querySelector<HTMLDivElement>("#app")!.innerHTML = quizPage;
+const setUpMainPage = () => {
+	document.querySelector<HTMLInputElement>("#start-btn")!.addEventListener("click", (e) => {
+		let emailInput = document.querySelector<HTMLInputElement>("#email-input");
+		let agreeCheckBox = document.querySelector<HTMLInputElement>("#agree-check-box");
+		if (emailInput!.value.trim() !== "" && agreeCheckBox!.checked)
+			document.querySelector<HTMLDivElement>("#app")!.innerHTML = quizPage;
+		else alert("Todos os campos obrigatórios precisam ser preenchidos para continuar.");
+	});
 
-const startBtn = document.querySelector<HTMLInputElement>("#start-btn");
-const exitBtn = document.querySelector<HTMLInputElement>("#exit-btn");
-const emailInput = document.querySelector<HTMLInputElement>("#email-input");
-const agreeCheckBoc = document.querySelector<HTMLInputElement>("#agree-check-box");
+	document.querySelector<HTMLInputElement>("#exit-btn")!.addEventListener("click", (e) => {
+		document.querySelector<HTMLDivElement>("#info")!.remove();
+	});
+};
 
-startBtn!.addEventListener("click", (e) => {
-	document.querySelector<HTMLDivElement>("#app")!.innerHTML = quizPage;
-});
-
-exitBtn!.addEventListener("click", (e) => {
-	document.querySelector<HTMLDivElement>("#info")!.remove();
-});
+document.querySelector<HTMLDivElement>("#app")!.innerHTML = mainPage;
+setUpMainPage();
 
 const canvas = document.querySelector<HTMLCanvasElement>("#canv");
 const canvasContext: CanvasRenderingContext2D | null = canvas!.getContext("2d");
