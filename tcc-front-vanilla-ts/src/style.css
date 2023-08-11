@@ -9,17 +9,50 @@ body {
 h2 {
 	font-size: 2em;
 	line-height: 1.1;
+	font-family: Courier, monospace;
+	text-align: center;
 }
 
 h4 {
 	font-size: 1.5em;
 	line-height: 1.1;
+	font-family: Courier, monospace;
+	color: #0f0;
 }
 
 p {
 	text-align: justify;
 	text-justify: inter-word;
 	padding: 1px;
+	font-size: 1.2em;
+	font-family: Courier, monospace;
+}
+
+#agree-div {
+	display: flex;
+	flex-direction: column;
+	/* border: solid;
+	border-width: 1px;
+	border-color: #ffffff; */
+	border-radius: 5px;
+	/* padding-left: 5px;
+	padding-right: 5px; */
+	padding-bottom: 5px;
+	margin-bottom: 0.5rem;
+	font-family: Courier, monospace;
+}
+
+#email-input {
+	/* margin-left: 0.5em; */
+	width: 25rem;
+	appearance: none;
+	border: none;
+	outline: none;
+	border-bottom: 1px solid #0f0;
+	background-color: rgba(0, 0, 0, 0.2);
+	border-radius: 0.2em 0.2em 0 0;
+	color: #0f0;
+	font-family: Courier, monospace;
 	font-size: 1.2em;
 }
 
@@ -49,13 +82,13 @@ p {
 }
 
 button {
+	font-family: Courier, monospace;
 	border-radius: 8px;
 	border: 1px solid transparent;
 	padding: 0.6em 1.2em;
 	font-size: 1em;
 	font-weight: 500;
-	font-family: inherit;
-	background-color: #1a1a1a;
+	/* font-family: inherit; */
 	cursor: pointer;
 	transition: border-color 0.25s;
 }

@@ -1,6 +1,6 @@
 import "./style.css";
 
-const mainPage = `
+const welcomePage = `
 <div class="container_div" style="position: relative; display: flex">
 <div
   id="info"
@@ -31,24 +31,29 @@ const mainPage = `
   <p  style="margin: 0">O desenvolvimento de modelos de inteligência artificial, como o ChatGPT, tornou possível que a tecnologia produza textos elaborados e articulados, que são tão semelhantes às produções humanas que muitas vezes é difícil saber se um texto foi escrito por homens ou máquinas.</p>
   <br/>
   <h4  style="margin: 0">Sabendo disso,</h4>
-  <p  style="margin: 0">minha proposta com esse questionário é que você leia 5 notícias e tente identificar se elas foram escritas por um ser humano ou pelo ChatGPT. Será que você conseguirá distinguir o homem da máquina? Mas tenha cuidado, você pode estar sendo observado pela Matrix, e tudo pode não passar de uma simulação...Boa sorte!</p>
+  <p  style="margin: 0">minha proposta com esse questionário é que você leia 5 notícias e tente identificar se elas foram escritas por um ser humano ou pelo ChatGPT. Será que você conseguirá distinguir o homem da máquina ? Mas tenha cuidado, você pode estar sendo observado pela Matrix, e tudo pode não passar de uma simulação... Boa sorte!</p>
   </div>
   <br/>
 
   <div style="display: flex; flex-direction: row">
-  <label for="email">E-mail:</label>
+  <label for="email" style="font-size: 1.2em; font-family: Courier, monospace;">E-mail:
   <input type="text" id="email-input" required />
+  </label>
+  
   </div>
   <br/>
 
-  <div style="display: flex; flex-direction: column">
+  <div id="agree-div">
   <p id="agreeCheckText">Suas respostas nesse questionário serão utilizadas de forma anônima para fins de análise e escrita de um artigo científico. O e-mail inserido terá como único e exclusivo propósito o controle de usuários que já realizaram o teste, para impedir que a mesma pessoa responda múltiplas vezes e comprometa o resultado da análise.</p>
+  <div>
   <input type="checkbox" id="agree-check-box" required name="Concordo" />
+  <label for="agree">Concordo</label>
+  </div>
   </div>
 
   <div style="display: flex; flex-direction: row-reverse">
-    <button style="background-color: red; color: white; margin: 2px" id="exit-btn">Sair</button>
-    <button style="background-color: blue; color: white; margin: 2px" id="start-btn">Vamos lá!</button>
+    <button style="background-color: red; color: white; margin: 3px" id="exit-btn">Sair</button>
+    <button style="background-color: blue; color: white; margin: 3px" id="start-btn">Vamos lá!</button>
   </div>
 </div>
 <canvas width="500" height="500" id="canv" />
@@ -82,7 +87,7 @@ const quizPage = `
 <canvas width="500" height="500" id="canv" />
 </div>`;
 
-const setUpMainPage = () => {
+const setUpWelcomePage = () => {
 	document.querySelector<HTMLInputElement>("#start-btn")!.addEventListener("click", (e) => {
 		let emailInput = document.querySelector<HTMLInputElement>("#email-input");
 		let agreeCheckBox = document.querySelector<HTMLInputElement>("#agree-check-box");
@@ -96,8 +101,8 @@ const setUpMainPage = () => {
 	});
 };
 
-document.querySelector<HTMLDivElement>("#app")!.innerHTML = mainPage;
-setUpMainPage();
+document.querySelector<HTMLDivElement>("#app")!.innerHTML = welcomePage;
+setUpWelcomePage();
 
 const canvas = document.querySelector<HTMLCanvasElement>("#canv");
 const canvasContext: CanvasRenderingContext2D | null = canvas!.getContext("2d");
