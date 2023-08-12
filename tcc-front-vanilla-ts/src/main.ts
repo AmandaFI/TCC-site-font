@@ -305,5 +305,8 @@ import "./style.css";
 
 	const NEWS_ARTICLE_QUANTITY = 5;
 	let subjectEmail = "";
+
+	window.addEventListener("resize", (_e) => setUpBackground());
+
 	welcomePage();
 })();
