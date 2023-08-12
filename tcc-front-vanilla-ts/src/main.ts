@@ -1,4 +1,4 @@
-import { checkEmail, getRandomNewsArticles, labelType, newsArticleType } from "./api";
+import { checkEmail, getRandomNewsArticles, labelType, newsArticleType, registerSubject } from "./api";
 import "./style.css";
 
 (() => {
@@ -69,8 +69,10 @@ import "./style.css";
 					if (emailValidatorRegExp.test(value)) {
 						checkEmail(value)
 							.then((response) => {
-								if (!response.data) setUpQuizPage();
-								else alert("E-mail inválido.");
+								if (!response.data) {
+									subjectEmail = value;
+									setUpQuizPage();
+								} else alert("E-mail inválido.");
 							})
 							.catch((e) => console.log(e));
 					} else alert("E-mail inválido.");
@@ -95,7 +97,6 @@ import "./style.css";
 		let newsArticles: newsArticleType[] | undefined = undefined;
 		let displayedNewsArticleIndex = 0;
 		const subjectAnswers: answersType = {};
-		const NEWS_ARTICLE_QUANTITY = 5;
 
 		const setUpNewsArticles = () => {
 			if (!newsArticles)
@@ -125,7 +126,7 @@ import "./style.css";
 					if (displayedNewsArticleIndex < NEWS_ARTICLE_QUANTITY) {
 						display();
 						checkRadioBtn();
-					} else console.log("fim");
+					} else calcResult();
 				} else {
 					alert("Classifique a notícia antes de continuar.");
 				}
@@ -149,6 +150,17 @@ import "./style.css";
 					document.querySelector<HTMLInputElement>("#gptRadio")!.checked = true;
 				else console.log("something wrong");
 			}
+		};
+
+		const calcResult = () => {
+			const right = Object.entries(subjectAnswers).reduce(
+				(acc, [index, answer]) => (newsArticles![+index].label === answer ? (acc += 1) : acc),
+				0
+			);
+			const score = right / NEWS_ARTICLE_QUANTITY;
+			registerSubject(subjectEmail, score)
+				.then((_response) => resultPage(right))
+				.catch((_e) => alert("Erro ao salvar resultado."));
 		};
 
 		const renderQuizPage = () => {
@@ -207,14 +219,48 @@ import "./style.css";
 		};
 	};
 
-	let currentMatrixInterval: number[] = [];
+	const resultPage = (score: number) => {
+		document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
+      <div class="container_div" style="position: relative; display: flex">
+      <div
+      style="
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-right: -50%;
+      transform: translate(-50%, -50%);
+      max-width: 50rem;
+      min-width: 20rem;
+      min-height: 10rem;
+      overflow-x: hidden;
+      background-color: rgba(0, 0, 0, 0.85);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      border: solid;
+      border-radius: 10px;
+      padding: 10px
+      "
+    >
+        <h2 style="color: #0f0; text-align: center;">Obrigado por participar!</h2>
+        <h2 style="color: white; text-align: center;">Acertos: ${score}/${NEWS_ARTICLE_QUANTITY}</h2>
+        
+    </div>
+        <canvas width="500" height="500" id="canv" />
+      </div>;
+      `;
+		setUpBackground();
+	};
+
+	let currentMatrixInterval: number | null = null;
 	const setUpBackground = () => {
 		const canvas = document.querySelector<HTMLCanvasElement>("#canv");
 		const canvasContext: CanvasRenderingContext2D | null = canvas!.getContext("2d");
 
 		if (currentMatrixInterval !== null) {
-			currentMatrixInterval.forEach((interval) => clearInterval(interval));
-			currentMatrixInterval = [];
+			console.log(currentMatrixInterval);
+			clearInterval(currentMatrixInterval);
+			currentMatrixInterval = null;
 		}
 		// set the width and height of the canvas
 		canvas!.width = document.body.offsetWidth;
@@ -254,9 +300,10 @@ import "./style.css";
 		};
 
 		// render the animation at 20 FPS.
-		currentMatrixInterval.push(setInterval(matrix, 50));
+		currentMatrixInterval = setInterval(matrix, 50);
 	};
 
+	const NEWS_ARTICLE_QUANTITY = 5;
 	let subjectEmail = "";
 	welcomePage();
 })();
