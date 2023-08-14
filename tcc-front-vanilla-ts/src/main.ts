@@ -3,8 +3,9 @@ import "./style.css";
 
 (() => {
 	const welcomePage = () => {
+		// colocar top e left em 50% para centralizar
 		const welcomePageHtml = `
-    <div class="container_div" style="position: relative; display: flex">
+    <div class="container_div" style="position: relative; display: inline-block;">
       <div
         id="info"
         class="hover_div"
@@ -12,18 +13,20 @@ import "./style.css";
         position: absolute;
         top: 50%;
         left: 50%;
-        margin-right: -50%;
+        margin-right: -40%;
         transform: translate(-50%, -50%);
         max-width: 50rem;
-        min-height: 20rem;
+        min-height: 15rem;
         overflow: hidden;
-        background-color: rgba(0, 0, 0, 0.85);
+        background-color: rgba(0, 0, 0, 0.80);
         color: white;
         display: flex;
         flex-direction: column;
         border: solid;
+				border-width: 2px;
         border-radius: 10px;
-        padding: 10px
+        padding: 10px;
+				
         "
       >
         <div style="display: flex; flex-direction: column">
@@ -35,27 +38,80 @@ import "./style.css";
           <p  style="margin: 0">minha proposta com esse questionário é que você leia 5 notícias (em inglês) e tente identificar se elas foram escritas por um ser humano ou pelo ChatGPT. Será que você conseguirá distinguir o homem da máquina ? Mas tenha cuidado, você pode estar sendo observado pela Matrix, e tudo pode não passar de uma simulação... Boa sorte!</p>
         </div>
         <br/>
-        <div style="display: flex; flex-direction: row">
-          <label for="email" style="font-size: 1.2em; font-family: Courier, monospace;">E-mail:
-          <input type="text" id="email-input" required />
-        </label>
-        </div>
-        <br/>
-        <div id="agree-div">
-          <p id="agreeCheckText">Suas respostas nesse questionário serão utilizadas de forma anônima para fins de análise e escrita de um artigo científico. O e-mail inserido terá como único e exclusivo propósito o controle de usuários que já realizaram o teste, para impedir que a mesma pessoa responda múltiplas vezes e comprometa o resultado da análise.</p>
-          <div>
-            <input type="checkbox" id="agree-check-box" required name="Concordo" />
-            <label for="agree">Concordo</label>
-          </div>
-        </div>
+        
         <div style="display: flex; flex-direction: row-reverse">
-          <button style="background-color: red; color: white; margin: 3px" id="exit-btn">Sair</button>
-          <button style="background-color: blue; color: white; margin: 3px" id="start-btn">Vamos lá!</button>
+          <button style="background-color: blue; color: white; margin: 3px" id="exit-btn">Sair</button>
+          <button style="background-color: red; color: white; margin: 3px" id="init-btn">Vamos lá!</button>
         </div>
       </div>
       <canvas width="500" height="500" id="canv" />
     </div>
   `;
+
+		const setUpListeners = () => {
+			document.querySelector<HTMLInputElement>("#init-btn")!.addEventListener("click", (_e) => termsPage());
+
+			document.querySelector<HTMLInputElement>("#exit-btn")!.addEventListener("click", (_e) => {
+				document.querySelector<HTMLDivElement>("#info")!.remove();
+			});
+		};
+
+		document.querySelector<HTMLDivElement>("#app")!.innerHTML = welcomePageHtml;
+		setUpBackground();
+		setUpListeners();
+	};
+
+	const termsPage = () => {
+		const termsPageHtml = `
+    <div class="container_div" style="position: relative; display: inline-block;">
+			<div
+			id="info"
+			class="hover_div"
+			style="
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-right: -40%;
+			transform: translate(-50%, -50%);
+			max-width: 30rem;
+			min-height: 10rem;
+			overflow: hidden;
+			background-color: rgba(0, 0, 0, 0.80);
+			color: white;
+			display: flex;
+			flex-direction: column;
+			border: solid;
+			border-width: 2px;
+			border-radius: 10px;
+			padding: 10px;
+			"
+		>
+			<h2 style="margin: 0; color:"#0f0">Antes de começar...</h4>
+			</br>
+			<div style="display: flex; flex-direction: row">
+				<label for="email" style="font-size: 1.2em; font-family: Courier, monospace;">E-mail:
+				<input type="text" id="email-input" required />
+				</label>
+			</div>
+			<br/>
+			<div id="agree-div">
+				<p id="agreeCheckText">Suas respostas nesse questionário serão utilizadas de forma <b>anônima</b> para fins de análise e escrita de um artigo científico. O e-mail inserido terá como único e exclusivo propósito o controle de usuários que já realizaram o teste, para impedir que a mesma pessoa responda múltiplas vezes e comprometa o resultado da análise.</p>
+				<div>
+					<input type="checkbox" id="agree-check-box" required name="Concordo" />
+					<label for="agree">Concordo</label>
+				</div>
+			</div>
+			<br/>
+			
+			<div style="display: flex; flex-direction: row-reverse">
+				<button style="background-color: blue; color: white; margin: 3px" id="exit-btn">Sair</button>
+				<button style="background-color: red; color: white; margin: 3px" id="start-btn">Iniciar</button>
+			</div>
+		</div>
+    <canvas width="500" height="500" id="canv" />
+  </div>
+  `;
+
 		const setUpListeners = () => {
 			document.querySelector<HTMLInputElement>("#start-btn")!.addEventListener("click", (_e) => {
 				const emailInput = document.querySelector<HTMLInputElement>("#email-input");
@@ -71,7 +127,7 @@ import "./style.css";
 							.then((response) => {
 								if (!response.data) {
 									subjectEmail = value;
-									setUpQuizPage();
+									quizPage();
 								} else alert("E-mail inválido.");
 							})
 							.catch((e) => console.log(e));
@@ -84,7 +140,7 @@ import "./style.css";
 			});
 		};
 
-		document.querySelector<HTMLDivElement>("#app")!.innerHTML = welcomePageHtml;
+		document.querySelector<HTMLDivElement>("#app")!.innerHTML = termsPageHtml;
 		setUpBackground();
 		setUpListeners();
 	};
@@ -93,7 +149,7 @@ import "./style.css";
 		[newsId: number]: labelType;
 	};
 
-	const setUpQuizPage = () => {
+	const quizPage = () => {
 		let newsArticles: newsArticleType[] | undefined = undefined;
 		let displayedNewsArticleIndex = 0;
 		const subjectAnswers: answersType = {};
@@ -163,7 +219,7 @@ import "./style.css";
 				.catch((_e) => alert("Erro ao salvar resultado."));
 		};
 
-		const renderQuizPage = () => {
+		const setQuizPageHtml = () => {
 			document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
       <div class="container_div" style="position: relative; display: flex">
         <div
@@ -171,12 +227,12 @@ import "./style.css";
           position: absolute;
           top: 50%;
           left: 50%;
-          margin-right: -50%;
+          margin-right: -40%;
           transform: translate(-50%, -50%);
           max-width: 50rem;
           min-height: 20rem;
           overflow-x: hidden;
-          background-color: rgba(0, 0, 0, 0.85);
+          background-color: rgba(0, 0, 0, 0.80);
           color: white;
           display: flex;
           flex-direction: column;
@@ -210,10 +266,10 @@ import "./style.css";
 		};
 
 		setUpNewsArticles();
-		setUpBackground();
+		// setUpBackground();
 
 		const display = () => {
-			renderQuizPage();
+			setQuizPageHtml();
 			setUpBackground();
 			setUpListeners();
 		};
@@ -222,30 +278,30 @@ import "./style.css";
 	const resultPage = (score: number) => {
 		document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
       <div class="container_div" style="position: relative; display: flex">
-      <div
-      style="
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin-right: -50%;
-      transform: translate(-50%, -50%);
-      max-width: 50rem;
-      min-width: 20rem;
-      min-height: 10rem;
-      overflow-x: hidden;
-      background-color: rgba(0, 0, 0, 0.85);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      border: solid;
-      border-radius: 10px;
-      padding: 10px
-      "
-    >
+				<div
+				style="
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-right: -40%;
+				transform: translate(-50%, -50%);
+				max-width: 50rem;
+				min-width: 20rem;
+				min-height: 10rem;
+				overflow-x: hidden;
+				background-color: rgba(0, 0, 0, 0.85);
+				color: white;
+				display: flex;
+				flex-direction: column;
+				border: solid;
+				border-radius: 10px;
+				padding: 10px
+				"
+				>
         <h2 style="color: #0f0; text-align: center;">Obrigado por participar!</h2>
         <h2 style="color: white; text-align: center;">Acertos: ${score}/${NEWS_ARTICLE_QUANTITY}</h2>
         
-    </div>
+    		</div>
         <canvas width="500" height="500" id="canv" />
       </div>;
       `;
@@ -258,7 +314,6 @@ import "./style.css";
 		const canvasContext: CanvasRenderingContext2D | null = canvas!.getContext("2d");
 
 		if (currentMatrixInterval !== null) {
-			console.log(currentMatrixInterval);
 			clearInterval(currentMatrixInterval);
 			currentMatrixInterval = null;
 		}
@@ -307,6 +362,7 @@ import "./style.css";
 	let subjectEmail = "";
 
 	window.addEventListener("resize", (_e) => setUpBackground());
+	//window.addEventListener("scroll", (e) => setUpBackground());
 
 	welcomePage();
 })();

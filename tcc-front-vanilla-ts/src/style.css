@@ -11,6 +11,7 @@ h2 {
 	line-height: 1.1;
 	font-family: Courier, monospace;
 	text-align: center;
+	color: #0f0;
 }
 
 h4 {
@@ -20,11 +21,11 @@ h4 {
 	color: #0f0;
 }
 
-p {
+p,
+label {
 	text-align: justify;
 	text-justify: inter-word;
-	padding: 1px;
-	font-size: 1.2em;
+	font-size: 1.3em;
 	font-family: Courier, monospace;
 }
 
@@ -44,7 +45,7 @@ p {
 
 #email-input {
 	/* margin-left: 0.5em; */
-	width: 25rem;
+	width: "3wh";
 	appearance: none;
 	border: none;
 	outline: none;
@@ -60,7 +61,7 @@ p {
 	text-align: justify;
 	text-justify: inter-word;
 	padding: 1px;
-	font-size: 1em;
+	font-size: 1.2em;
 }
 
 /* #app {
@@ -93,7 +94,7 @@ button {
 	transition: border-color 0.25s;
 }
 button:hover {
-	border-color: #646cff;
+	border-color: #ffffff;
 }
 button:focus,
 button:focus-visible {
