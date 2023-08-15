@@ -30,12 +30,12 @@ import "./style.css";
         "
       >
         <div style="display: flex; flex-direction: column">
-          <h2 style="color: #0f0">Bem-Vindo ao questionário do meu TCC!</h2>
+          <h2 style="color: #0f0">Bem-vindo ao questionário do meu TCC!</h2>
           <h4 style="margin: 0">Contextualizando...</h4>
-          <p  style="margin: 0">O desenvolvimento de modelos de inteligência artificial, como o ChatGPT, tornou possível que a tecnologia produza textos elaborados e articulados, que são tão semelhantes às produções humanas que muitas vezes é difícil saber se um texto foi escrito por homens ou máquinas.</p>
+          <p  style="margin: 0">O desenvolvimento de modelos de inteligência artificial, como o ChatGPT, possibilitou que a tecnologia produza textos complexos, que são tão semelhantes às produções humanas que muitas vezes é difícil saber se um texto foi escrito por homens ou máquinas.</p>
           <br/>
           <h4  style="margin: 0">Sabendo disso,</h4>
-          <p  style="margin: 0">minha proposta com esse questionário é que você leia 5 notícias (em inglês) e tente identificar se elas foram escritas por um ser humano ou pelo ChatGPT. Será que você conseguirá distinguir o homem da máquina ? Mas tenha cuidado, você pode estar sendo observado pela Matrix, e tudo pode não passar de uma simulação... Boa sorte!</p>
+          <p  style="margin: 0">minha proposta é que você leia 5 notícias (em inglês) selecionadas de forma randômica e independente de um conjunto contendo notícias escritas tanto pelo ChatGPT quanto por seres humanos e tente identificar se o autor da notícia foi um ser humano ou o ChatGPT. Será que você conseguirá distinguir o homem da máquina ? Mas tenha cuidado, você pode estar sendo observado pela Matrix, e tudo pode não passar de uma simulação... Boa sorte!</p>
         </div>
         <br/>
         
@@ -257,8 +257,8 @@ import "./style.css";
           <br/>
       
           <div style="display: flex; flex-direction: row-reverse">
-            <button style="background-color: red; color: white; margin: 3px" id="back-btn">Voltar</button>
-            <button style="background-color: blue; color: white; margin: 3px" id="next-btn">Próxima</button>
+            <button style="background-color: blue; color: white; margin: 3px" id="back-btn">Voltar</button>
+            <button style="background-color: red; color: white; margin: 3px" id="next-btn">Próxima</button>
           </div>
         </div>
         <canvas width="500" height="500" id="canv" />

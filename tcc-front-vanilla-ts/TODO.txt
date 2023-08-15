@@ -1,4 +1,0 @@
-- fazer serializdores
-- criar chamads axios para api
-- setUpQuizPage
-- resoler como chamar o background

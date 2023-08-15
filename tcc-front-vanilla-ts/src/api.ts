@@ -21,7 +21,7 @@ export type newsArticleType = {
 
 export const getNewsArticle = (id: number) => axios.get<newsArticleType>(`new_article/${id}`);
 export const getRandomNewsArticles = (quantity: number) =>
-	axios.post<Array<newsArticleType>>(`news_article/get_random_news_articles`, { quantity });
+	axios.get<Array<newsArticleType>>(`news_article/get_random_news_articles?quantity=${quantity}`);
 
 export const registerSubject = (email: string, score: number) => axios.post<subjectType>("subject", { email, score });
 export const checkEmail = (email: string) => axios.post<subjectType>("subject/check_email", { email });
