@@ -7,8 +7,8 @@ import "./style.css";
 		const welcomePageHtml = `
     <div class="container_div" style="position: relative;">
       <div
-        id="info"
-        class="hover_div"
+				id="welcome_div"
+        class="info"
         style="
         position: absolute;
         
@@ -16,8 +16,6 @@ import "./style.css";
         margin-right: -40%;
         transform: translate(-50%, -50%);
 
-				
-				
         max-width: 50rem;
         min-height: 15rem;
         overflow: hidden;
@@ -55,7 +53,7 @@ import "./style.css";
 			document.querySelector<HTMLInputElement>("#init-btn")!.addEventListener("click", (_e) => termsPage());
 
 			document.querySelector<HTMLInputElement>("#exit-btn")!.addEventListener("click", (_e) => {
-				document.querySelector<HTMLDivElement>("#info")!.remove();
+				document.querySelector<HTMLDivElement>("#welcome_div")!.remove();
 			});
 		};
 
@@ -68,8 +66,7 @@ import "./style.css";
 		const termsPageHtml = `
     <div class="container_div" style="position: relative; display: inline-block;">
 			<div
-			id="info"
-			class="hover_div"
+			id="termsDiv"
 			style="
 			position: absolute;
 			top: 50%;
@@ -139,7 +136,7 @@ import "./style.css";
 			});
 
 			document.querySelector<HTMLInputElement>("#exit-btn")!.addEventListener("click", (_e) => {
-				document.querySelector<HTMLDivElement>("#info")!.remove();
+				document.querySelector<HTMLDivElement>("#termsDiv")!.remove();
 			});
 		};
 
@@ -226,7 +223,7 @@ import "./style.css";
         <div
           style="
           position: absolute;
-          top: 50%;
+					top: 50%;
           left: 50%;
           margin-right: -40%;
           transform: translate(-50%, -50%);
