@@ -5,16 +5,19 @@ import "./style.css";
 	const welcomePage = () => {
 		// colocar top e left em 50% para centralizar
 		const welcomePageHtml = `
-    <div class="container_div" style="position: relative; display: inline-block;">
+    <div class="container_div" style="position: relative;">
       <div
         id="info"
         class="hover_div"
         style="
         position: absolute;
-        top: 50%;
+        
         left: 50%;
         margin-right: -40%;
         transform: translate(-50%, -50%);
+
+				
+				
         max-width: 50rem;
         min-height: 15rem;
         overflow: hidden;
