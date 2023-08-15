@@ -124,13 +124,13 @@ import "./style.css";
 				if (value !== "" && agreeCheckBox!.checked) {
 					if (emailValidatorRegExp.test(value)) {
 						checkEmail(value)
-							.then((response) => {
+							.then((response: any) => {
 								if (!response.data) {
 									subjectEmail = value;
 									quizPage();
 								} else alert("E-mail inválido.");
 							})
-							.catch((e) => console.log(e));
+							.catch(() => console.log("Erro."));
 					} else alert("E-mail inválido.");
 				} else alert("Todos os campos obrigatórios precisam ser preenchidos para continuar.");
 			});
@@ -157,11 +157,11 @@ import "./style.css";
 		const setUpNewsArticles = () => {
 			if (!newsArticles)
 				getRandomNewsArticles(5)
-					.then((response) => {
-						newsArticles = response.data;
+					.then((response: any) => {
+						newsArticles = response ? response.data : [];
 						display();
 					})
-					.catch((e) => console.log(e));
+					.catch(() => console.log("Erro."));
 		};
 
 		const setUpListeners = () => {
@@ -213,8 +213,8 @@ import "./style.css";
 			);
 			const score = right / NEWS_ARTICLE_QUANTITY;
 			registerSubject(subjectEmail, score)
-				.then((_response) => resultPage(right))
-				.catch((_e) => alert("Erro ao salvar resultado."));
+				.then(() => resultPage(right))
+				.catch(() => alert("Erro ao salvar resultado."));
 		};
 
 		const setQuizPageHtml = () => {
@@ -359,7 +359,7 @@ import "./style.css";
 	const NEWS_ARTICLE_QUANTITY = 5;
 	let subjectEmail = "";
 
-	window.addEventListener("resize", (_e) => setUpBackground());
+	window.addEventListener("resize", () => setUpBackground());
 	//window.addEventListener("scroll", (e) => setUpBackground());
 
 	welcomePage();
