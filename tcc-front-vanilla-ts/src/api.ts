@@ -1,6 +1,7 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:3000/api/";
+// axios.defaults.baseURL = "http://localhost:3000/api/";
+axios.defaults.baseURL = "https://infinite-citadel-83075-194be0dadd42.herokuapp.com/api/";
 
 export type subjectType = {
 	id: number;
