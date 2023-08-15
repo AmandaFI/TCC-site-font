@@ -159,7 +159,6 @@ import "./style.css";
 				getRandomNewsArticles(5)
 					.then((response) => {
 						newsArticles = response.data;
-						console.log(response);
 						display();
 					})
 					.catch((e) => console.log(e));
@@ -171,7 +170,6 @@ import "./style.css";
 					if (item instanceof HTMLInputElement) {
 						if (item.checked) {
 							subjectAnswers[displayedNewsArticleIndex] = item.value as labelType;
-							console.log(subjectAnswers);
 							return;
 						}
 					}
