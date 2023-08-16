@@ -1,4 +1,5 @@
-body {
+body,
+html {
 	margin: 0;
 
 	place-items: center;
@@ -107,7 +108,11 @@ button:focus-visible {
 
 @media (max-height: 1000px) and (max-width: 450px) {
 	.info {
-		top: 70%;
+		top: 40rem;
+	}
+	#canv {
+		height: 100%;
+		width: 100%;
 	}
 }
 

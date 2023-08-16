@@ -8,6 +8,7 @@ import "./style.css";
     <div class="container_div" style="position: relative;">
       <div
 				id="welcome_div"
+				name="info"
         class="info"
         style="
         position: absolute;
@@ -45,7 +46,7 @@ import "./style.css";
           <button style="background-color: red; color: white; margin: 3px" id="init-btn">Vamos lá!</button>
         </div>
       </div>
-      <canvas width="500" height="500" id="canv" />
+      <canvas width="500" height="500" style="display: flex" id ="canv" />
     </div>
   `;
 
@@ -67,6 +68,7 @@ import "./style.css";
     <div class="container_div" style="position: relative; display: inline-block;">
 			<div
 			id="termsDiv"
+			name="info"
 			style="
 			position: absolute;
 			top: 50%;
@@ -221,6 +223,7 @@ import "./style.css";
 			document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
       <div class="container_div" style="position: relative; display: flex">
         <div
+					name="info"
           style="
           position: absolute;
 					top: 50%;
@@ -277,6 +280,7 @@ import "./style.css";
 		document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
       <div class="container_div" style="position: relative; display: flex">
 				<div
+				name="info"
 				style="
 				position: absolute;
 				top: 50%;
@@ -316,20 +320,25 @@ import "./style.css";
 			currentMatrixInterval = null;
 		}
 		// set the width and height of the canvas
-		canvas!.width = document.body.offsetWidth;
-		canvas!.height = document.body.offsetHeight;
+		canvas!.width = window.innerWidth;
+		canvas!.height = window.innerHeight;
+
+		if (document.querySelectorAll<HTMLDivElement>("[name='info']")![0].offsetHeight > window.innerHeight) {
+			canvas!.height += window.innerHeight;
+			console.log("aumentou");
+		}
 
 		// draw a black rectangle of width and height same as that of the canvas
 		canvasContext!.fillStyle = "#000";
-		canvasContext!.fillRect(0, 0, document.body.offsetWidth, document.body.offsetHeight);
+		canvasContext!.fillRect(0, 0, canvas!.width, canvas!.height);
 
-		const cols = Math.floor(document.body.offsetWidth / 20) + 1;
+		const cols = Math.floor(window.innerWidth / 20) + 1;
 		const ypos = Array(cols).fill(0);
 
 		const matrix = () => {
 			// Draw a semitransparent black rectangle on top of previous drawing
 			canvasContext!.fillStyle = "#0001";
-			canvasContext!.fillRect(0, 0, document.body.offsetWidth, document.body.offsetHeight);
+			canvasContext!.fillRect(0, 0, canvas!.width, canvas!.height);
 
 			// Set color to green and font to 15pt monospace in the drawing context
 			canvasContext!.fillStyle = "#0f0";
@@ -360,7 +369,7 @@ import "./style.css";
 	let subjectEmail = "";
 
 	window.addEventListener("resize", () => setUpBackground());
-	//window.addEventListener("scroll", (e) => setUpBackground());
+	// window.addEventListener("scroll", (e) => setUpBackground());
 
 	welcomePage();
 })();
