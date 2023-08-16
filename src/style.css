@@ -108,7 +108,7 @@ button:focus-visible {
 
 @media (max-height: 1000px) and (max-width: 450px) {
 	.info {
-		top: 40rem;
+		top: 45rem;
 	}
 	#canv {
 		height: 100%;
