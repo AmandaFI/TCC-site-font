@@ -324,7 +324,7 @@ import "./style.css";
 		canvas!.height = window.innerHeight;
 
 		if (document.querySelectorAll<HTMLDivElement>("[name='info']")![0].offsetHeight > window.innerHeight) {
-			canvas!.height += window.innerHeight;
+			canvas!.height += 2 * window.innerHeight;
 			console.log("aumentou");
 		}
 
